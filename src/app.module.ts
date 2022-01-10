@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import {MongooseModule} from "@nestjs/mongoose";
 
 @Module({
-  imports: [MongooseModule.forRoot("mongodb+srv://book_api:azerty1596@cluster0.kgirz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")],
+  imports: [MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority")],
   controllers: [AppController],
   providers: [AppService],
 })

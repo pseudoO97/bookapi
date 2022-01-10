@@ -1,8 +1,8 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
-import {HasRead, HasReadDocument} from "../entities/HasRead";
+import {HasRead, HasReadDocument} from "../entities/has-read";
 import {Model} from "mongoose";
-import { CreateHasReadDto } from "src/dto/HasRead.dto";
+import { CreateHasReadDto } from "src/dto/create-has-read.dto";
 
 @Injectable()
 export class HasReadService {
