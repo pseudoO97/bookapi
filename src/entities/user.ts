@@ -1,28 +1,32 @@
 /**
  * Dorian Jullian
  */
-export class User {
+import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 
-    /**
-     * The id of the user
-     * @example 1
-     */
-    id: bigint;
+export type UserDocument = User & Document;
+
+@Schema()
+export class User {
 
     /**
      * The pseudo of the user
      * @example John
      */
+    @Prop()
     pseudo: string;
 
     /**
      * The password of the user
      * @example hash
      */
+    @Prop()
     password: string;
 
     /**
      * The email of the user
      */
+    @Prop()
     email: string;
 }
+
+export const UserSchema = SchemaFactory.createForClass(User);
