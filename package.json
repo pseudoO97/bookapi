@@ -23,7 +23,9 @@
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
+    "@nestjs/mongoose": "^9.0.2",
     "@nestjs/platform-express": "^8.0.0",
+    "mongoose": "^6.1.5",
     "@nestjs/swagger": "^5.1.5",
     "class-validator": "^0.13.2",
     "graphql": "^15.8.0",
