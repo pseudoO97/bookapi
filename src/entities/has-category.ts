@@ -1,7 +1,10 @@
 /**
  * Dorian Jullian
  */
-import {Prop, Schema} from "@nestjs/mongoose";
+import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import {Document} from "mongoose";
+
+export type HasCategoryDocument = BookHasCategory & Document;
 
 @Schema()
 export class BookHasCategory {
@@ -18,3 +21,5 @@ export class BookHasCategory {
     @Prop()
     id_category: bigint;
 }
+
+export const HasCategorySchema = SchemaFactory.createForClass(BookHasCategory);

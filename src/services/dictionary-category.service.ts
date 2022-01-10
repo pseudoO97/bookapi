@@ -1,22 +1,21 @@
 import {Injectable} from "@nestjs/common";
-import {User} from "../entities/user";
-import {CreateUserDto} from "../dto/create-user.dto";
-import mongo_connector from "../mongo_connector";
+import {InjectModel} from "@nestjs/mongoose";
+import {DictionaryHasCategory, DictionaryCategoryDocument} from "../entities/dictionary-category";
+import {Model} from "mongoose";
+import { CreateDictionaryCategoryDto } from "src/dto/dictionary-category.dto";
 
 @Injectable()
-export class UserService {
+export class DictionaryCategoryService {
 
-    create(user: CreateUserDto): User {
-        const mg = mongo_connector();
-        return null;
+    constructor(@InjectModel(DictionaryHasCategory.name) private model: Model<DictionaryCategoryDocument>) {}
+
+    async create(createCatDto: CreateDictionaryCategoryDto): Promise<DictionaryHasCategory> {
+        const createdCat = new this.model(createCatDto);
+        return createdCat.save();
     }
 
-    findOne(id: number): User {
-        return null;
-    }
-
-    findAll(): User[] {
-        return [];
+    async findAll(): Promise<DictionaryHasCategory[]> {
+        return this.model.find().exec();
     }
 
 }

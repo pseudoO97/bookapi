@@ -1,22 +1,21 @@
 import {Injectable} from "@nestjs/common";
-import {User} from "../entities/user";
-import {CreateUserDto} from "../dto/create-user.dto";
-import mongo_connector from "../mongo_connector";
+import {InjectModel} from "@nestjs/mongoose";
+import {User, UserDocument} from "../entities/User";
+import {Model} from "mongoose";
+import { CreateUserDto } from "src/dto/User.dto";
 
 @Injectable()
 export class UserService {
 
-    create(user: CreateUserDto): User {
-        const mg = mongo_connector();
-        return null;
+    constructor(@InjectModel(User.name) private model: Model<UserDocument>) {}
+
+    async create(createCatDto: CreateUserDto): Promise<User> {
+        const createdCat = new this.model(createCatDto);
+        return createdCat.save();
     }
 
-    findOne(id: number): User {
-        return null;
-    }
-
-    findAll(): User[] {
-        return [];
+    async findAll(): Promise<User[]> {
+        return this.model.find().exec();
     }
 
 }
