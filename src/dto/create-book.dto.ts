@@ -1,21 +1,19 @@
-import { IsInt ,IsString,IsDate} from 'class-validator';
+// Auriane GS
+import { IsDateString, IsInt, IsString } from 'class-validator';
 
-export class CreateBookDto {
- 
-
+export class CreateBookDto { 
   @IsInt()
-  id: number;
+  id: bigint;
 
   @IsString()
-   title : string;
+  title: string;
 
-   @IsString()
-   summary: string;
+  @IsString()
+  summary: string;
 
-   @IsString()
-   link_preview: string;
+  @IsString()
+  link_preview: string;
 
-   @IsDate()
-   date_released: Date;
-
+  @IsDateString()
+  date_released: String;
 }
