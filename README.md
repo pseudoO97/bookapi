@@ -77,3 +77,4 @@ Nest is [MIT licensed](LICENSE).
 - Auriane 
 - Badis
 - Dorian
+- Omar

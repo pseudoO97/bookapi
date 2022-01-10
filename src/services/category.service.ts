@@ -2,6 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {Category, CategoryDocument} from "../entities/category";
 import {Model} from "mongoose";
+import {CreateCategoryDto} from "../dto/category.dto";
 
 @Injectable()
 export class CategoryService {
@@ -15,6 +16,10 @@ export class CategoryService {
 
     async findAll(): Promise<Category[]> {
         return this.model.find().exec();
+    }
+
+    async findOne(id: number): Promise<Category> {
+        return this.model.findOne({_id: id}).exec()
     }
 
 }
