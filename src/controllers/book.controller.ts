@@ -18,8 +18,8 @@ export class BookController {
     @Post()
     @ApiOperation({ summary: 'Create cat' })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async create(@Body() createCatDto: CreateBookDto): Promise<Book> {
-      return this.BookService.create(createCatDto);
+    async create(@Body() createBookDto: CreateBookDto): Promise<Book> {
+      return this.BookService.create(createBookDto);
     }
   
     @Get(':id')
