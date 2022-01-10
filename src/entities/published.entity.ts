@@ -1,10 +1,18 @@
-// Auriane GS
-import { IsInt, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class CreatePublishedDto { 
-  @IsInt()
-  id: bigint;
+export class Published {
+  /**
+   * The name of the Cat
+   * @example Kitty
+   */
+  name: string;
 
-  @IsInt()
-  id_publisher: number;
+  @ApiProperty({ example: 1, description: 'The age of the Cat' })
+  age: number;
+
+  @ApiProperty({
+    example: 'Maine Coon',
+    description: 'The breed of the Cat',
+  })
+  breed: string;
 }
