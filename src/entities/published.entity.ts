@@ -1,18 +1,13 @@
+import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class Published {
-  /**
-   * The name of the Cat
-   * @example Kitty
-   */
-  name: string;
+ // Auriane
 
-  @ApiProperty({ example: 1, description: 'The age of the Cat' })
-  age: number;
+  @Prop()
+  id_published: bigint;
 
-  @ApiProperty({
-    example: 'Maine Coon',
-    description: 'The breed of the Cat',
-  })
-  breed: string;
+  @Prop()
+  id_publisher: number;
 }
+export const PublishedSchema = SchemaFactory.createForClass(Published);

@@ -1,18 +1,18 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { SchemaFactory } from '@nestjs/mongoose';
 
 export class Book {
   /**
-   * The name of the Cat
-   * @example Kitty
+   * Auriane
+   * 
    */
-  name: string;
-
-  @ApiProperty({ example: 1, description: 'The age of the Cat' })
-  age: number;
-
-  @ApiProperty({
-    example: 'Maine Coon',
-    description: 'The breed of the Cat',
-  })
-  breed: string;
+   /**
+    * The id of the book
+    */
+   id: bigint;
+   title: string;
+   summary: string;
+   link_preview: string;
+   date_released: Date;
 }
+
+export const BookSchema = SchemaFactory.createForClass(Book);

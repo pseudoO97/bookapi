@@ -8,14 +8,12 @@ export type DictionaryDocument = Dictionary & Document;
 @Schema()
 export class Dictionary {
 
-
     /**
      * The name of the dictionary collection
      * @example My Sci-fi Collec
      */
     @Prop()
     name: string;
-
 
 }
 

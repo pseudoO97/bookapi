@@ -1,18 +1,9 @@
+import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class Lang {
-  /**
-   * The name of the Cat
-   * @example Kitty
-   */
+ // Auriane 
+  id_lang: bigint;
   name: string;
-
-  @ApiProperty({ example: 1, description: 'The age of the Cat' })
-  age: number;
-
-  @ApiProperty({
-    example: 'Maine Coon',
-    description: 'The breed of the Cat',
-  })
-  breed: string;
 }
+export const LangSchema = SchemaFactory.createForClass(Lang);

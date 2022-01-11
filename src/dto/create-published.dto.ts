@@ -3,7 +3,7 @@ import { IsInt, IsString } from 'class-validator';
 
 export class CreatePublishedDto { 
   @IsInt()
-  id: bigint;
+  id_published: bigint;
 
   @IsInt()
   id_publisher: number;
