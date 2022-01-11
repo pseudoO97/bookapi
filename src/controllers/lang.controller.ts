@@ -13,13 +13,13 @@ import { Lang } from '../entities/lang.entity';
 @ApiTags('lang')
 @Controller('lang')
 export class LangController {
-    constructor(private readonly BookService: LangService) {}
+    constructor(private readonly Service: LangService) {}
 
     @Post()
     @ApiOperation({ summary: 'Create lang' })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
     async create(@Body() createCatDto: CreateLangDto): Promise<Lang> {
-      return this.BookService.create(createCatDto);
+      return this.Service.create(createCatDto);
     }
   
     @Get(':id')
@@ -29,6 +29,7 @@ export class LangController {
       type: Lang,
     })
     findOne(@Param('id') id: string): Lang {
-      return this.BookService.findOne(+id);
+      return //this.Service.findOne(+id);
+        null;
     }
 }

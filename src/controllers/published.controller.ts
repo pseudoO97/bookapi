@@ -29,6 +29,7 @@ export class PublishedController {
       type: Published,
     })
     findOne(@Param('id') id: string): Published {
-      return this.PublishedService.findOne(+id);
+      return //this.PublishedService.findOne(+id);
+        null;
     }
 }

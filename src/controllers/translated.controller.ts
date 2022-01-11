@@ -29,6 +29,7 @@ export class TranslatedController {
       type: Translated,
     })
     findOne(@Param('id') id: string): Translated {
-      return this.TranslatedService.findOne(+id);
+      return //this.TranslatedService.findOne(+id);
+        null;
     }
 }
