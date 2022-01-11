@@ -3,11 +3,10 @@ import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger
 import {CategoryService} from "../services/category.service";
 import {CreateCategoryDto} from "../dto/category.dto";
 import {Category} from "../entities/category";
-import {Book} from "../entities/book.entity";
 
 @ApiBearerAuth()
-@ApiTags('book')
-@Controller('book')
+@ApiTags('category')
+@Controller('category')
 export class CategoryController {
     constructor(private readonly Service: CategoryService) {}
 
