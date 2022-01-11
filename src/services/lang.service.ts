@@ -8,7 +8,7 @@ import { Lang } from '../entities/lang.entity';
 export class LangService {
   constructor(@InjectModel(Lang.name) private model: Model<Lang>) {}
 
-  async create(createCatDto: CreateLangDto): Promise<Lang> {
+  async create(CreateLangDto: CreateLangDto): Promise<Lang> {
       const createdLang = new this.model(CreateLangDto);
       return createdLang.save();
   }
