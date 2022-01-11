@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CategoryService} from "../services/category.service";
-import {CreateCategoryDto} from "../dto/category.dto";
+import {CreateCategoryDto} from "../dto/create-category.dto";
 import {Category} from "../entities/category";
 
 @ApiBearerAuth()
@@ -12,9 +12,13 @@ export class CategoryController {
 
     @Post()
     @ApiOperation({ summary: 'Create a category book' })
-    @ApiResponse({ status: 403, description: 'Forbidden.' })
     async create(@Body() createDto: CreateCategoryDto): Promise<Category> {
         return this.Service.create(createDto);
+    }
+
+    @Get()
+    findAll(): Promise<Category[]>{
+        return this.Service.findAll();
     }
 
     @Get(':id')
