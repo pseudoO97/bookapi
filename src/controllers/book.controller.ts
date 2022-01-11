@@ -29,6 +29,6 @@ export class BookController {
       type: Book,
     })
     findOne(@Param('id') id: string): Book {
-      return this.BookService.findOne(+id);
+      return null;
     }
 }

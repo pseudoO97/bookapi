@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateLangDto } from '../dto/create-lang.dto';
 import { Lang } from '../entities/lang.entity';
 
 @Injectable()
 export class LangService {
-  private readonly langs: Lang[] = [];
+  constructor(@InjectModel(Lang.name) private model: Model<Lang>) {}
 
-  create(lang: CreateLangDto): Lang {
-    return null;
+  async create(createCatDto: CreateLangDto): Promise<Lang> {
+      const createdLang = new this.model(CreateLangDto);
+      return createdLang.save();
   }
 
-  findOne(id: number): Lang {
-    return this.langs[id];
+  async findAll(): Promise<Lang[]> {
+      return this.model.find().exec();
   }
 }
