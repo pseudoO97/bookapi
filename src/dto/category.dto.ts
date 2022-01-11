@@ -1,7 +1,6 @@
 import { IsInt,IsString } from 'class-validator';
 
 export class CreateCategoryDto {
- 
 
   @IsInt()
   id: number;
@@ -9,6 +8,5 @@ export class CreateCategoryDto {
   @IsString()
   name: string;
 
- 
 
 }
