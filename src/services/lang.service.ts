@@ -14,6 +14,6 @@ export class LangService {
   }
 
   async findAll(): Promise<Lang[]> {
-      return this.model.find().exec();
+    return this.model.find().exec();
   }
 }

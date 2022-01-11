@@ -10,8 +10,8 @@ export class HasReadService {
     constructor(@InjectModel(HasRead.name) private model: Model<HasReadDocument>) {}
 
     async create(createCatDto: CreateHasReadDto): Promise<HasRead> {
-        const createdCat = new this.model(createCatDto);
-        return createdCat.save();
+        const createdHasRead = new this.model(createCatDto);
+        return createdHasRead.save();
     }
 
     async findAll(): Promise<HasRead[]> {
