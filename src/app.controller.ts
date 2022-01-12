@@ -1,4 +1,5 @@
 import { Controller, Get,Request, Post, UseGuards } from '@nestjs/common';
+import { Book } from './entities/book.entity';
 import { AuthService } from './jwt/auth/auth.service';
 import { JwtAuthGuard } from './jwt/auth/jwd-auth.guard';
 import { LocalAuthGuard } from './jwt/auth/local-auth.guard';
@@ -13,9 +14,9 @@ export class AppController {
     return this.authService.login(req.user);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('profile')
+  // findAll(): Promise<Book[]>{
+  //   return req.user;
+  // }
 }
