@@ -27,7 +27,7 @@ $ npm run start
 ```bash
 $ curl -X POST http://localhost:3000/login -d '{"username": "John", "password": "John"}' -H "Content-Type: application/json"
 ```
-- Ensuite les urls sécurisées sont <a href="http://localhost:3000/book/api" target="_blank">localhost:3000/book/api</a>  et <a href="http://localhost:3000/category/api" target="_blank">localhost:3000/book/api</a>. Et bien sûr nous pourrons y accéder via une requête POST.
+- Ensuite les urls sécurisées sont <a href="http://localhost:3000/book/api" target="_blank">localhost:3000/book/api</a>  et <a href="http://localhost:3000/category/api" target="_blank">localhost:3000/category/api</a>. Et bien sûr nous pourrons y accéder via une requête POST.
 <br><br>
 - Nous pouvons insérer des données en POST avec par exemple avec par exemple <a href="http://localhost:3000/dictionary" target="_blank">/dictionary</a> etc... et les visualiser en GET.
 <br><br>
