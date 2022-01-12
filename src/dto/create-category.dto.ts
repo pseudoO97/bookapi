@@ -1,14 +1,9 @@
 import { IsInt,IsString } from 'class-validator';
+import {ApiParam, ApiProperty} from "@nestjs/swagger";
 
 export class CreateCategoryDto {
- 
-
-  @IsInt()
-  id: number;
 
   @IsString()
-  name: string;
-
- 
+  readonly name: string;
 
 }

@@ -29,7 +29,7 @@ export class PublisherController {
       type: Publisher,
     })
     findOne(@Param('id') id: string): Publisher {
-      return //this.PublisherService.findOne(+id);
-        null;
+      // return this.PublisherService.findOne(+id);
+      return null;
     }
 }
