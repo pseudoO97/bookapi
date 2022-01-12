@@ -6,6 +6,6 @@ export class CreatewrittenDto {
   @IsInt()
   id: number;
 
-  @IsInt()
-  id_author: number;
+  // @IsInt()
+  // id_author: number;
 } 
