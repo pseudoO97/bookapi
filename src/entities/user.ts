@@ -21,13 +21,15 @@ export class User {
      * The password of the user
      * @example hash
      */
-     @Prop({ type: String, required: true})
+    @ApiProperty({example: "John", description: "pseudo of users"})
+    @Prop({ type: String, required: true})
      password: string;
 
     /**
      * The email of the user
      */
-     @Prop({ type: String, required: true})
+    @ApiProperty({example: "John", description: "pseudo of users"})
+    @Prop({ type: String, required: true})
      email: string;
 
 }

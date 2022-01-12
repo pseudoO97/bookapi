@@ -6,21 +6,19 @@ import { User, UserDocument } from "../entities/user";
 
 @Injectable()
 export class UserService {
-    
 
     constructor(@InjectModel(User.name) private model: Model<UserDocument>) {}
 
     async create(createCatDto: CreateUserDto): Promise<User> {
         const createdCat = new this.model(createCatDto);
-        return createdCat.save();
+        return await createdCat.save();
     }
 
     async findAll(): Promise<User[]> {
-        return this.model.find().exec();
+        return await this.model.find().exec();
     }
 
    async findOne(pseudo: string): Promise<User> {
-
-        return this.model.findOne({pseudo:pseudo}).exec();
+        return await this.model.findOne({pseudo:pseudo}).exec();
     }
 }

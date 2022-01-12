@@ -1,5 +1,5 @@
 import {Body, Controller, Get, Param, Post} from '@nestjs/common';
-import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import { CreateUserDto } from '../dto/create-user.dto';
 import { User } from '../entities/user';
 import { UserService } from '../services/user.service';
@@ -12,6 +12,7 @@ export class UserController {
 
     @Post()
     @ApiOperation({ summary: 'Create a User book' })
+    @ApiBody({type:User, description:"Insert a new user."})
     @ApiResponse({ status: 403, description: 'Forbidden.' })
     async create(@Body() createDto: CreateUserDto): Promise<User> {
         return this.Service.create(createDto);
