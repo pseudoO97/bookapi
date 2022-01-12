@@ -29,7 +29,7 @@ export class LangController {
       type: Lang,
     })
     findOne(@Param('id') id: string): Lang {
-      return //this.Service.findOne(+id);
-        null;
+      // return this.BookService.findOne(+id);
+      return null;
     }
 }

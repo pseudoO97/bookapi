@@ -4,21 +4,23 @@ import {Category, CategoryDocument} from "../entities/category";
 import {Model} from "mongoose";
 import {CreateCategoryDto} from "src/dto/create-category.dto";
 
+//Dorian Jullian
 @Injectable()
 export class CategoryService {
 
     constructor(@InjectModel(Category.name) private model: Model<CategoryDocument>) {}
 
     async create(createCatDto: CreateCategoryDto): Promise<Category> {
-        return this.model.create(createCatDto);
+        const created = new this.model(createCatDto);
+        return await created.save();
     }
 
     async findAll(): Promise<Category[]> {
-        return this.model.find().exec();
+        return await this.model.find().exec();
     }
 
-    async findOne(id: number): Promise<Category> {
-        return this.model.findOne({_id: id}).exec()
+    async findOne(name: string): Promise<Category> {
+        return await this.model.findOne({name: name}).exec();
     }
 
 }
