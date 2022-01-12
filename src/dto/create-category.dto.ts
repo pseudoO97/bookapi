@@ -1,6 +1,6 @@
 import { IsInt,IsString } from 'class-validator';
-import {ApiParam, ApiProperty} from "@nestjs/swagger";
 
+//Dorian
 export class CreateCategoryDto {
 
   @IsString()

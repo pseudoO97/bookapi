@@ -7,8 +7,9 @@ import {ApiProperty} from "@nestjs/swagger";
 
 export type CategoryDocument = Category & Document;
 
+//Dorian
 @Schema()
-export class Category{
+export class Category {
 
     /**
      * The name of the category
