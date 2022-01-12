@@ -9,8 +9,26 @@ export class UserService {
 
     constructor(@InjectModel(User.name) private model: Model<UserDocument>) {}
 
-    async create(createCatDto: CreateUserDto): Promise<User> {
-        const createdCat = new this.model(createCatDto);
+
+    private readonly users = [
+        {
+          email: 'test@john.com',
+          pseudo: 'john',
+          password: 'changeme',
+        },
+        {
+          email: 'maria@hehe.fr',
+          pseudo: 'maria',
+          password: 'guess',
+        },
+      ];
+    
+      async findOne(pseudo: string): Promise<User | undefined> {
+        return this.users.find(user => user.pseudo === pseudo);
+      }
+
+    async create(createUserDto: CreateUserDto): Promise<User> {
+        const createdCat = new this.model(createUserDto);
         return createdCat.save();
     }
 
