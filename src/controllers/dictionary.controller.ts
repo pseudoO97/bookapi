@@ -22,7 +22,7 @@ export class DictionaryController {
     }
 
     @Get()
-    @ApiOperation({summary: 'Get the categories book'})
+    @ApiOperation({summary: 'Get the dictionary book'})
     @ApiResponse({
         status: 200,
         description: 'Get all categories',
