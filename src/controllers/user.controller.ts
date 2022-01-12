@@ -1,8 +1,8 @@
 import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {UserService} from "../services/User.service";
-import {CreateUserDto} from "../dto/create-user.dto";
-import {User} from "../entities/User";
+import { CreateUserDto } from '../dto/create-user.dto';
+import { User } from '../entities/user';
+import { UserService } from '../services/user.service';
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -17,14 +17,14 @@ export class UserController {
         return this.Service.create(createDto);
     }
 
-    @Get(':id')
+    @Get(':pseudo')
     @ApiResponse({
         status: 200,
         description: 'The found record',
         type: User,
     })
-    findOne(@Param('id') id): Promise<User> {
-        //return this.Service.findOne(+id);
-        return null;
+    findOne(@Param('pseudo') pseudo:string): Promise<User> {
+        return this.Service.findOne(pseudo);
+       // return null;
     }
 }

@@ -1,11 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { User, UserDocument } from "../entities/User";
 import { Model } from "mongoose";
-import { CreateUserDto } from "src/dto/create-user.dto";
+import { CreateUserDto } from "../dto/create-user.dto";
+import { User, UserDocument } from "../entities/user";
 
 @Injectable()
 export class UserService {
+    
 
     constructor(@InjectModel(User.name) private model: Model<UserDocument>) {}
 
@@ -18,4 +19,8 @@ export class UserService {
         return this.model.find().exec();
     }
 
+   async findOne(pseudo: string): Promise<User> {
+
+        return this.model.findOne({pseudo:pseudo}).exec();
+    }
 }

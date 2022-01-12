@@ -1,16 +1,14 @@
-import { IsInt ,IsString,IsDate} from 'class-validator';
+import { IsInt ,IsString } from 'class-validator';
 
 export class CreateUserDto {
-  @IsInt()
-  id: number;
+  
 
   @IsString()
   password: string;
 
   @IsString()
-   pseudo : string;
+  pseudo : string;
 
-   @IsString()
-   email: string;
-
+  @IsString()
+  email: string;
 }
