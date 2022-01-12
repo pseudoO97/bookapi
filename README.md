@@ -2,7 +2,8 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-
+### Project
+ Ce projet est une API REST pour récupérer des données concernant des livres. Tout ceci dans le but de créer une application où nous pourrons recenser nos livres préférés que nous souhaiterions partager. 
 ## Workers
 
 - Auriane 
@@ -22,7 +23,8 @@ $ npm install
 $ npm run start
 ```
 ## How it works
-Pour tester la sécurité des URL sur Postman récupérer le token avec curl : 
+Pour tester la sécurité des URL sur Postman récupérer le token avec cette commande curl : 
+
 ```bash
 $ curl -X POST http://localhost:3000/login -d '{"username": "John", "password": "John"}' -H "Content-Type: application/json"
 ```
