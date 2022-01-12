@@ -9,10 +9,12 @@ import { UsersModule } from './jwt/users/users.module';
 import {LangModule} from "./modules/lang.module";
 import {PublisherModule} from "./modules/publisher.module";
 import { AppController } from './app.controller';
+import { AuthorModule } from './modules/author.module';
 @Module({
   imports: [
     MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
     CategoryModule,
+    AuthorModule,
     UserModule,
     UsersModule,
     BookModule,
