@@ -10,6 +10,7 @@ import { PublisherModule } from "./modules/publisher.module";
 import { AppController } from './app.controller';
 import {HasReadModule} from "./modules/has-read.module";
 import {DictionaryModule} from "./modules/dictionary.module"
+import {LocationModule} from "./modules/location.module";
 
 @Module({
   imports: [
@@ -21,8 +22,9 @@ import {DictionaryModule} from "./modules/dictionary.module"
     PublisherModule,
     AuthModule,
     HasReadModule,
-    DictionaryModule
-    
+    DictionaryModule,
+      LocationModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AuthService],

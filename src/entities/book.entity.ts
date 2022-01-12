@@ -1,7 +1,7 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {ApiProperty} from "@nestjs/swagger";
 import {Category} from "./category.entity";
-import {Location} from "./location.entities";
+import {Location} from "./location.entity";
 import {Lang} from "./lang.entity";
 import {Publisher} from "./publisher.entity";
 import {Author} from "./author.entity";
