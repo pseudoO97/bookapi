@@ -2,6 +2,7 @@
  * Dorian Jullian
  */
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import { ApiProperty } from "@nestjs/swagger";
 
 export type DictionaryDocument = Dictionary & Document;
 
@@ -12,7 +13,8 @@ export class Dictionary {
      * The name of the dictionary collection
      * @example My Sci-fi Collec
      */
-    @Prop()
+    @ApiProperty({example: "label", description: "pseudo of dictionary"})
+    @Prop({ type: String, required: true})
     name: string;
 
 }
