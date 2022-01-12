@@ -1,16 +1,18 @@
-import {Body, Controller, Get, Param, Post} from '@nestjs/common';
+import {Body, Request, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
 import {ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CategoryService} from "../services/category.service";
 import {CreateCategoryDto} from "../dto/create-category.dto";
 import {Category} from "../entities/category.entity";
+import { JwtAuthGuard } from 'src/jwt/auth/jwd-auth.guard';
+import { AuthService } from 'src/jwt/auth/auth.service';
+import { LocalAuthGuard } from 'src/jwt/auth/local-auth.guard';
 
 //Dorian
 @ApiBearerAuth()
 @ApiTags('category')
 @Controller('category')
 export class CategoryController {
-    constructor(private readonly Service: CategoryService) {}
-
+    constructor(private readonly Service: CategoryService, private authService: AuthService) {}
     @Post()
     @ApiOperation({ summary: 'Create a category book'})
     @ApiBody({type:Category, description:"Insert a new category for book."})
@@ -18,8 +20,9 @@ export class CategoryController {
     async create(@Body() createDto: CreateCategoryDto): Promise<Category> {
         return this.Service.create(createDto);
     }
-
-    @Get()
+    
+    @Post('categories')
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({summary: 'Get the categories book'})
     @ApiResponse({
         status: 200,
