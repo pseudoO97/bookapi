@@ -13,6 +13,7 @@ import { LocalAuthGuard } from 'src/jwt/auth/local-auth.guard';
 @Controller('category')
 export class CategoryController {
     constructor(private readonly Service: CategoryService, private authService: AuthService) {}
+
     @Post()
     @ApiOperation({ summary: 'Create a category book'})
     @ApiBody({type:Category, description:"Insert a new category for book."})
@@ -20,8 +21,8 @@ export class CategoryController {
     async create(@Body() createDto: CreateCategoryDto): Promise<Category> {
         return this.Service.create(createDto);
     }
-    
-    @Post('categories')
+
+    @Post('api')
     @UseGuards(JwtAuthGuard)
     @ApiOperation({summary: 'Get the categories book'})
     @ApiResponse({
