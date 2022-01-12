@@ -1,4 +1,5 @@
-import { SchemaFactory } from '@nestjs/mongoose';
+import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class Book {
   /**
@@ -8,11 +9,24 @@ export class Book {
    /**
     * The id of the book
     */
-   id: bigint;
-   title: string;
-   summary: string;
-   link_preview: string;
-   date_released: Date;
+  id: bigint;
+
+
+  @Prop()
+  title: string;
+  @ApiProperty({
+  example: 'Maine Coon',
+  description: 'The breed of the Cat',
+  })
+
+  @Prop()
+  summary: string;
+
+  @Prop()
+  link_preview: string;
+
+  @Prop()
+  date_released: Date;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

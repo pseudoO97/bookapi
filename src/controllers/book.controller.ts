@@ -16,19 +16,23 @@ export class BookController {
     constructor(private readonly BookService: BookService) {}
 
     @Post()
-    @ApiOperation({ summary: 'Create cat' })
-    @ApiResponse({ status: 403, description: 'Forbidden.' })
+    @ApiOperation({ summary: 'Create book' })
+    @ApiResponse({ 
+      status: 403, 
+      description: 'Forbidden.' 
+    })
     async create(@Body() createBookDto: CreateBookDto): Promise<Book> {
       return this.BookService.create(createBookDto);
     }
   
     @Get(':id')
+    @ApiOperation({ summary: 'Get a book' })
     @ApiResponse({
       status: 200,
       description: 'The found record',
       type: Book,
     })
     findOne(@Param('id') id: string): Book {
-      return null;
+      return this.BookService.findOne(id);
     }
 }
