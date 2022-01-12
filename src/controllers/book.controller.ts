@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import {
     ApiBearerAuth, ApiBody,
     ApiOperation,
@@ -8,6 +8,7 @@ import {
 import { BookService } from '../services/book.service';
 import { CreateBookDto } from '../dto/create-book.dto';
 import {Book} from '../entities/book.entity';
+import { JwtAuthGuard } from 'src/jwt/auth/jwd-auth.guard';
 
 @ApiBearerAuth()
 @ApiTags('book')
@@ -23,13 +24,14 @@ export class BookController {
       return this.Service.create(createBookDto);
     }
 
-    @Get()
+    @Post('api')
     @ApiOperation({summary: 'Get the collection book'})
     @ApiResponse({
         status: 200,
         description: 'Get all books',
         type: Book
     })
+    @UseGuards(JwtAuthGuard)
     async findAll(): Promise<Book[]>{
         return this.Service.findAll();
     }
