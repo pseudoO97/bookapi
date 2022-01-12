@@ -1,5 +1,11 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {ApiProperty} from "@nestjs/swagger";
+import {Category} from "./category.entity";
+import {Location} from "./location.entities";
+import {Lang} from "./lang.entity";
+import {Publisher} from "./publisher.entity";
+import {Author} from "./author.entity";
+import * as mongoose from "mongoose";
 
 export type BookDocument = Book & Document;
 
@@ -22,6 +28,22 @@ export class Book {
     @ApiProperty({example: "2015-02-15", description: "Set the release date of the book"})
     @Prop({type: Date, required: true})
     date_released: Date;
+
+    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CategorySchema'}]})
+    categories: Category[];
+
+    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'LangSchema'}]})
+    langs: Lang[];
+
+    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Location'}]})
+    locations: Location[];
+
+    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Publisher'}]})
+    publishers: Publisher[];
+
+    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Author'}]})
+    author: Author[];
+
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

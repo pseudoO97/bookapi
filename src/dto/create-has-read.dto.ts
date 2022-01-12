@@ -1,7 +1,6 @@
 import { IsInt ,IsString,IsDate} from 'class-validator';
 
 export class CreateHasReadDto {
- 
 
   @IsInt()
   id: number;
@@ -16,8 +15,6 @@ export class CreateHasReadDto {
   note: number;
 
   @IsString()
-   commentary : string;
-
-  
+  commentary : string;
 
 }
