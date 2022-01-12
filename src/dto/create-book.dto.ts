@@ -3,25 +3,19 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsInt, IsString } from 'class-validator';
 
 export class CreateBookDto { 
-  @ApiProperty()
-  @IsInt()
-  id: bigint;
 
   @IsString()
-  @ApiProperty({
-    title: 'Maine Coon'
-    })
-  title: string;
+  readonly title: string;
 
   @ApiProperty()
   @IsString()
-  summary: string;
+  readonly summary: string;
 
   @ApiProperty()
   @IsString()
-  link_preview: string;
+  readonly link_preview: string;
 
   @ApiProperty()
   @IsDateString()
-  date_released: String;
+  readonly date_released: String;
 }
