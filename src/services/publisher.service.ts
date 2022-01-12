@@ -2,18 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePublisherDto } from '../dto/create-publisher.dto';
-import { Publisher } from '../entities/publisher.entity';
+import {Publisher, PublisherDocument} from '../entities/publisher.entity';
 
+//Dorian
 @Injectable()
 export class PublisherService {
-  constructor(@InjectModel(Publisher.name) private model: Model<Publisher>) {}
+  constructor(@InjectModel(Publisher.name) private model: Model<PublisherDocument>) {}
 
   async create(createCatDto: CreatePublisherDto): Promise<Publisher> {
       const createdPublisher = new this.model(CreatePublisherDto);
-      return createdPublisher.save();
+      return await createdPublisher.save();
   }
 
   async findAll(): Promise<Publisher[]> {
-      return this.model.find().exec();
+      return await this.model.find().exec();
+  }
+
+  async findOne(name: string): Promise<Publisher> {
+      return await this.model.findOne({name:name}).exec();
   }
 }
