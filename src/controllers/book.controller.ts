@@ -7,20 +7,20 @@ import {
 } from '@nestjs/swagger';
 import { BookService } from '../services/book.service';
 import { CreateBookDto } from '../dto/create-book.dto';
-import { Book } from '../entities/book.entity';
+import {Book} from '../entities/book.entity';
 
 @ApiBearerAuth()
 @ApiTags('book')
 @Controller('book')
 export class BookController {
-    constructor(private readonly BookService: BookService) {}
+    constructor(private readonly Service: BookService) {}
 
     @Post()
     @ApiOperation({ summary: 'Create a new book' })
-    @ApiBody({type: Book, description: 'Insert a new book to the collection'})
+    @ApiBody({type: CreateBookDto, description: 'Insert a new book to the collection'})
     @ApiResponse({ status: 403, description: 'Forbidden.' })
     async create(@Body() createBookDto: CreateBookDto): Promise<Book> {
-      return this.BookService.create(createBookDto);
+      return this.Service.create(createBookDto);
     }
 
     @Get()
@@ -31,7 +31,7 @@ export class BookController {
         type: Book
     })
     async findAll(): Promise<Book[]>{
-        return this.BookService.findAll();
+        return this.Service.findAll();
     }
 
 
@@ -43,6 +43,6 @@ export class BookController {
         type: Book
     })
     async findOne(@Param('title') title: string): Promise<Book> {
-      return this.BookService.findOne(title);
+      return this.Service.findOne(title);
     }
 }

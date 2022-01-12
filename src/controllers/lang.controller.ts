@@ -18,7 +18,7 @@ export class LangController {
 
     @Post()
     @ApiOperation({ summary: 'Create a lang'})
-    @ApiBody({type:Category, description:"Insert a new lang."})
+    @ApiBody({type:Lang, description:"Insert a new lang."})
     @ApiResponse({ status: 403, description: 'Forbidden.' })
     async create(@Body() createCatDto: CreateLangDto): Promise<Lang> {
       return this.Service.create(createCatDto);
@@ -32,7 +32,7 @@ export class LangController {
         type: Lang
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async findAll(): Promise<Category[]>{
+    async findAll(): Promise<Lang[]>{
         return this.Service.findAll();
     }
 
