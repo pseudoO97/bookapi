@@ -27,9 +27,11 @@ $ npm run start
 ```bash
 $ curl -X POST http://localhost:3000/login -d '{"username": "John", "password": "John"}' -H "Content-Type: application/json"
 ```
-- Ensuite les urls sécurisées sont <a href="localhost:3000/book/api">localhost:3000/book/api</a>  et <a href="localhost:3000/category/api">localhost:3000/book/api</a>
+- Ensuite les urls sécurisées sont <a href="http://localhost:3000/book/api" target="_blank">localhost:3000/book/api</a>  et <a href="http://localhost:3000/category/api" target="_blank">localhost:3000/book/api</a>
 <br><br>
-- Nous pouvons insérer des données en POST avec par exemple avec /category, /book, /dictionary etc... et les visualiser en GET
+- Nous pouvons insérer des données en POST avec par exemple avec <a href="http://localhost:3000/category" target="_blank"> /category </a>, <a href="http://localhost:3000/book" target="_blank">/book</a>, <a href="http://localhost:3000/dictionary" target="_blank">/dictionary</a> etc... et les visualiser en GET
+<br><br>
+- Enfin, nous pouvons visualiser les URL avec Swagger via <a href="http://localhost:3000/api" target="_blank">localhost:3000/book/api</a>
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
