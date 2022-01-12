@@ -29,18 +29,23 @@ export class Book {
     @Prop({type: Date, required: true})
     date_released: Date;
 
+    @ApiProperty()
     @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'CategorySchema'}]})
     categories: Category[];
 
+    @ApiProperty()
     @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'LangSchema'}]})
     langs: Lang[];
 
+    @ApiProperty()
     @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Location'}]})
     locations: Location[];
 
+    @ApiProperty()
     @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Publisher'}]})
     publishers: Publisher[];
 
+    @ApiProperty()
     @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Author'}]})
     author: Author[];
 
