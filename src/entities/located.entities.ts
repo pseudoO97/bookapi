@@ -4,8 +4,8 @@ export class CreatelocatedDto {
  
 
   @IsInt()
-  id: number;
+  id: bigint ;
 
   @IsInt()
-  id_location: number;
+  id_location: bigint;
 } 
