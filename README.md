@@ -2,7 +2,8 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-### Project
+## Branche du projet à installer : Master
+## Project
  Ce projet est une API REST (liée à MongoDB) pour récupérer des données concernant des livres. Tout ceci dans le but de créer une application où nous pourrons recenser nos livres préférés que nous souhaiterions partager. 
 ## Workers
 
