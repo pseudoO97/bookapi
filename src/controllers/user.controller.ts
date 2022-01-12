@@ -28,4 +28,5 @@ export class UserController {
         return this.Service.findOne(pseudo);
        // return null;
     }
+
 }
