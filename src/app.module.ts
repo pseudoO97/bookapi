@@ -10,6 +10,8 @@ import {LangModule} from "./modules/lang.module";
 import {PublisherModule} from "./modules/publisher.module";
 import { AppController } from './app.controller';
 import {HasReadModule} from "./modules/has-read.module";
+import {DictionaryModule} from "./modules/dictionary.module"
+
 @Module({
   imports: [
     MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
@@ -20,7 +22,9 @@ import {HasReadModule} from "./modules/has-read.module";
     LangModule,
     PublisherModule,
     AuthModule,
-    HasReadModule
+    HasReadModule,
+    DictionaryModule
+    
   ],
   controllers: [AppController],
   providers: [AuthService],

@@ -6,6 +6,7 @@ import { CreateDictionaryDto } from "src/dto/Dictionary.dto";
 
 @Injectable()
 export class DictionaryService {
+    
 
     constructor(@InjectModel(Dictionary.name) private model: Model<DictionaryDocument>) {}
 
@@ -16,6 +17,9 @@ export class DictionaryService {
 
     async findAll(): Promise<Dictionary[]> {
         return this.model.find().exec();
+    }
+    async findOne(name: string): Promise<Dictionary> {
+        return this.model.findOne({name:name}).exec();
     }
 
 }
