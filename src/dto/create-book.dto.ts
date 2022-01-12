@@ -2,18 +2,16 @@
 import { IsDateString, IsInt, IsString } from 'class-validator';
 
 export class CreateBookDto { 
-  @IsInt()
-  id: bigint;
 
   @IsString()
-  title: string;
+  readonly title: string;
 
   @IsString()
-  summary: string;
+  readonly summary: string;
 
   @IsString()
-  link_preview: string;
+  readonly link_preview: string;
 
   @IsDateString()
-  date_released: String;
+  readonly date_released: String;
 }

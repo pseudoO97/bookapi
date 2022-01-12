@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
-import {Category, CategoryDocument} from "../entities/category";
+import {Category, CategoryDocument} from "../entities/category.entity";
 import {Model} from "mongoose";
 import {CreateCategoryDto} from "src/dto/create-category.dto";
 
