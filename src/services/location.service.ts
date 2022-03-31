@@ -1,24 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import {Location, LocationDocument} from "../entities/location.entity";
+import {LocationEntity} from "../entities/location.entity";
 import {CreateLocationDto} from "../dto/create-location.dto";
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 
 //Dorian
 @Injectable()
 export class LocationService {
-  constructor(@InjectModel(Location.name) private model: Model<LocationDocument>) {}
+  constructor(
+      @InjectRepository(LocationEntity)
+      private repository: Repository<LocationEntity>
+  ) {}
 
-  async create(createLocationDto: CreateLocationDto): Promise<Location> {
+/*  async create(createLocationDto: CreateLocationDto): Promise<LocationEntity> {
       const createdLang = new this.model(createLocationDto);
       return await createdLang.save();
+  }*/
+
+  async findAll(): Promise<LocationEntity[]> {
+      return await this.repository.find();
   }
 
-  async findAll(): Promise<Location[]> {
-    return await this.model.find().exec();
-  }
-
-  async findOne(filter: { name:string }|{country:string}): Promise<Location> {
-      return await this.model.findOne(filter).exec();
+  async findOne(filter: { name:string }|{country:string}): Promise<LocationEntity> {
+      return await this.repository.findOne(filter);
   }
 }

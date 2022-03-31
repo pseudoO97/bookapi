@@ -1,28 +1,28 @@
 import {Injectable} from "@nestjs/common";
-import {InjectModel} from "@nestjs/mongoose";
-import {Model} from "mongoose";
-import { Author, AuthorDocument } from "src/entities/author.entities";
-import { CreateAuthorDto } from "src/dto/create-author.dto";
+import { AuthorEntity } from "src/entities/author.entity";
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 
 //badis
 @Injectable()
 export class AuthorService {
 
-    constructor(@InjectModel(Author.name) private model: Model<AuthorDocument>) {}
+    constructor(
+        @InjectRepository(AuthorEntity)
+        private repository: Repository<AuthorEntity>,
+    ) {}
 
-    async create(createAuthorDto: CreateAuthorDto): Promise<Author> {
+/*    async create(createAuthorDto: CreateAuthorDto): Promise<AuthorEntity> {
         const created = new this.model(createAuthorDto);
         return await created.save();
+    }*/
+
+    async findAll(): Promise<AuthorEntity[]> {
+        return await this.repository.find();
     }
 
-    async findAll(): Promise<Author[]> {
-        return await this.model.find().exec();
+    async findOne(firstname: string): Promise<AuthorEntity> {
+        return await this.repository.findOne({firstName: firstname});
     }
-
-    async findOne(firstname: string): Promise<Author> {
-        return await this.model.findOne({firstname: firstname}).exec();
-    }
-
-    
 
 }

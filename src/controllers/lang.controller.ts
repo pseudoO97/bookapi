@@ -7,8 +7,8 @@ import {
 } from '@nestjs/swagger';
 import { LangService } from '../services/lang.service';
 import { CreateLangDto } from '../dto/create-lang.dto';
-import { Lang } from '../entities/lang.entity';
-import {Category} from "../entities/category.entity";
+import { LangEntity } from '../entities/lang.entity';
+import {CategoryEntity} from "../entities/category.entity";
 
 @ApiBearerAuth()
 @ApiTags('lang')
@@ -18,10 +18,10 @@ export class LangController {
 
     @Post()
     @ApiOperation({ summary: 'Create a lang'})
-    @ApiBody({type:Lang, description:"Insert a new lang."})
+    @ApiBody({type:LangEntity, description:"Insert a new lang."})
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async create(@Body() createCatDto: CreateLangDto): Promise<Lang> {
-      return this.Service.create(createCatDto);
+    async create(@Body() createCatDto: CreateLangDto): Promise<LangEntity> {
+      return null;//this.Service.create(createCatDto);
     }
 
     @Get()
@@ -29,10 +29,10 @@ export class LangController {
     @ApiResponse({
         status: 200,
         description: 'Get all lang',
-        type: Lang
+        type: LangEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async findAll(): Promise<Lang[]>{
+    async findAll(): Promise<LangEntity[]>{
         return this.Service.findAll();
     }
 
@@ -41,15 +41,15 @@ export class LangController {
     @ApiResponse({
         status: 200,
         description: 'Found the lang',
-        type: Lang
+        type: LangEntity
     })
     @ApiResponse({
         status: 404,
         description: 'No lang with this name',
-        type: Lang
+        type: LangEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    findOne(@Param('name') name: string): Promise<Lang> {
+    findOne(@Param('name') name: string): Promise<LangEntity> {
       return this.Service.findOne(name);
     }
 }

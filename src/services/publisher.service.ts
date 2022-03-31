@@ -1,24 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { CreatePublisherDto } from '../dto/create-publisher.dto';
-import {Publisher, PublisherDocument} from '../entities/publisher.entity';
 
-//Dorian
+import {Injectable} from "@nestjs/common";
+import {InjectRepository} from "@nestjs/typeorm";
+import {PublisherEntity} from "../entities/publisher.entity";
+import {Repository} from "typeorm";
+
 @Injectable()
 export class PublisherService {
-  constructor(@InjectModel(Publisher.name) private model: Model<PublisherDocument>) {}
-
-  async create(createCatDto: CreatePublisherDto): Promise<Publisher> {
+  constructor(
+      @InjectRepository(PublisherEntity)
+      private repository: Repository<PublisherEntity>
+  ) {}
+/*
+  async create(createCatDto: CreatePublisherDto): Promise<PublisherEntity> {
       const createdPublisher = new this.model(CreatePublisherDto);
       return await createdPublisher.save();
+  }*/
+
+  async findAll(): Promise<PublisherEntity[]> {
+      return await this.repository.find();
   }
 
-  async findAll(): Promise<Publisher[]> {
-      return await this.model.find().exec();
-  }
-
-  async findOne(name: string): Promise<Publisher> {
-      return await this.model.findOne({name:name}).exec();
+  async findOne(name: string): Promise<PublisherEntity> {
+      return await this.repository.findOne({name:name});
   }
 }

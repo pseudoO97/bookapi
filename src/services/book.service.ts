@@ -1,26 +1,29 @@
 import { Injectable, Param } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import { CreateBookDto } from '../dto/create-book.dto';
-import {Book, BookDocument} from '../entities/book.entity';
+import {BookEntity} from '../entities/book.entity';
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 
 @Injectable()
 export class BookService {
-  constructor(@InjectModel(Book.name) private model: Model<BookDocument>) {}
+  constructor(
+      @InjectRepository(BookEntity)
+      private repository: Repository<BookEntity>
+  ) {}
 
-  async create(createBookDto: CreateBookDto): Promise<Book> {
+/*  async create(createBookDto: CreateBookDto): Promise<BookEntity> {
     const createdBook = new this.model(createBookDto);
     return await createdBook.save();
-  }
+  }*/
 
-  // findOne(@Param('id') id: string): Book{
+  // findOne(@Param('id') id: string): BookEntity{
   //   return this.books[id];
   // }
-  async findAll(): Promise<Book[]> {
-      return await this.model.find().exec();
+  async findAll(): Promise<BookEntity[]> {
+      return await this.repository.find();
   }
 
-  async findOne(title: string): Promise<Book> {
-    return await this.model.findOne({title: title}).exec();
+  async findOne(title: string): Promise<BookEntity> {
+    return await this.repository.findOne({title: title});
   }
 }

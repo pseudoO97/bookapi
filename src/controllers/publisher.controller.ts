@@ -7,8 +7,8 @@ import {
 } from '@nestjs/swagger';
 import { PublisherService } from '../services/publisher.service';
 import { CreatePublisherDto } from '../dto/create-publisher.dto';
-import { Publisher } from '../entities/publisher.entity';
-import {Category} from "../entities/category.entity";
+import { PublisherEntity } from '../entities/publisher.entity';
+import {CategoryEntity} from "../entities/category.entity";
 
 @ApiBearerAuth()
 @ApiTags('publisher')
@@ -18,10 +18,10 @@ export class PublisherController {
 
     @Post()
     @ApiOperation({ summary: 'Create a publisher book\'s'})
-    @ApiBody({type:Category, description:"Insert a new publisher."})
+    @ApiBody({type:CategoryEntity, description:"Insert a new publisher."})
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async create(@Body() createPublisherDto: CreatePublisherDto): Promise<Publisher> {
-      return this.PublisherService.create(createPublisherDto);
+    async create(@Body() createPublisherDto: CreatePublisherDto): Promise<PublisherEntity> {
+      return null;//this.PublisherService.create(createPublisherDto);
     }
 
     @Get()
@@ -29,10 +29,10 @@ export class PublisherController {
     @ApiResponse({
         status: 200,
         description: 'Get all publisher',
-        type: Publisher
+        type: PublisherEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async findAll(): Promise<Publisher[]>{
+    async findAll(): Promise<PublisherEntity[]>{
         return this.PublisherService.findAll();
     }
 
@@ -40,15 +40,15 @@ export class PublisherController {
     @ApiResponse({
       status: 200,
       description: 'The found publisher',
-      type: Publisher,
+      type: PublisherEntity,
     })
     @ApiResponse({
         status: 404,
         description: 'No publisher with this name',
-        type: Category
+        type: CategoryEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    findOne(@Param('name') name: string): Promise<Publisher> {
+    findOne(@Param('name') name: string): Promise<PublisherEntity> {
       return this.PublisherService.findOne(name);
     }
 }

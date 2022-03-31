@@ -1,23 +1,14 @@
-/**
- * Dorian Jullian
- */
-import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {Document} from 'mongoose';
 import {ApiProperty} from "@nestjs/swagger";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-export type CategoryDocument = Category & Document;
+@Entity({name: "categories"})
+export class CategoryEntity {
 
-//Dorian
-@Schema()
-export class Category {
+    @PrimaryGeneratedColumn()
+    @ApiProperty({example: 1, description: "The id of the category.", readOnly: true})
+    id: number;
 
-    /**
-     * The name of the category
-     * @example Sci-fi
-     */
+    @Column()
     @ApiProperty({example: "Sci-fi", description: "The category or tag book."})
-    @Prop({ type: String, required: true})
     name: string;
 }
-
-export const CategorySchema = SchemaFactory.createForClass(Category);

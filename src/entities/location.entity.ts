@@ -1,20 +1,19 @@
-import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {Document} from "mongoose";
 import {ApiProperty} from "@nestjs/swagger";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-export type LocationDocument = Location & Document;
+@Entity({name:"locations"})
+export class LocationEntity {
 
-@Schema()
-export class Location {
+   @PrimaryGeneratedColumn()
+   @ApiProperty({example: 1, description:"The id of the publisher"})
+   id: number;
 
+   @Column()
    @ApiProperty({example: "France", description: "Set the country location"})
-   @Prop({type: String, required: true})
    country : string;
 
+   @Column()
    @ApiProperty({example: "Aldi", description: "Set the name of book shop"})
-   @Prop({type: String, required: true})
    name: string;
 
 }
-
-export const LocationSchema = SchemaFactory.createForClass(Location);

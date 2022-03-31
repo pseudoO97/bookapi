@@ -13,6 +13,17 @@ import {HasReadModule} from "./modules/has-read.module";
 import {DictionaryModule} from "./modules/dictionary.module"
 import {LocationModule} from "./modules/location.module";
 import {TypeOrmModule} from "@nestjs/typeorm";
+import {Connection} from "typeorm";
+import {AuthorEntity} from "./entities/author.entity";
+import {UserEntity} from "./entities/user.entity";
+import {LocationEntity} from "./entities/location.entity";
+import {LangEntity} from "./entities/lang.entity";
+import {BookEntity} from "./entities/book.entity";
+import {DictionaryEntity} from "./entities/dictionary.entity";
+import {CategoryEntity} from "./entities/category.entity";
+import {HasReadEntity} from "./entities/has-read.entity";
+import {PublisherEntity} from "./entities/publisher.entity";
+import {UserService} from "./services/user.service";
 
 @Module({
   imports: [
@@ -23,7 +34,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
       username: 'root',
       password: '',
       database: 'books',
-      entities: [],
+      entities: [AuthorEntity,UserEntity,LocationEntity,LangEntity,BookEntity,DictionaryEntity,CategoryEntity,HasReadEntity,PublisherEntity],
       synchronize: true,
     }),
     // MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
@@ -33,13 +44,14 @@ import {TypeOrmModule} from "@nestjs/typeorm";
     BookModule,
     LangModule,
     PublisherModule,
-    AuthModule,
     HasReadModule,
     DictionaryModule,
-      LocationModule,
+    LocationModule,
     AuthModule
   ],
   controllers: [AppController],
-  providers: [AuthService],
+  providers: [UserService,AuthService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private connection: Connection) {}
+}

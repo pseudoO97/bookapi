@@ -7,7 +7,7 @@ import {
 } from '@nestjs/swagger';
 import {LocationService} from "../services/location.service";
 import {CreateLocationDto} from "../dto/create-location.dto";
-import {Location} from "../entities/location.entity";
+import {LocationEntity} from "../entities/location.entity";
 
 @ApiBearerAuth()
 @ApiTags('location')
@@ -17,10 +17,10 @@ export class LocationController {
 
     @Post()
     @ApiOperation({ summary: 'Create a location'})
-    @ApiBody({type:Location, description:"Insert a new location."})
+    @ApiBody({type:LocationEntity, description:"Insert a new location."})
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async create(@Body() createLocationDto: CreateLocationDto): Promise<Location> {
-      return this.Service.create(createLocationDto);
+    async create(@Body() createLocationDto: CreateLocationDto): Promise<LocationEntity> {
+      return null;//this.Service.create(createLocationDto);
     }
 
     @Get()
@@ -28,10 +28,10 @@ export class LocationController {
     @ApiResponse({
         status: 200,
         description: 'Get all location',
-        type: Location
+        type: LocationEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async findAll(): Promise<Location[]>{
+    async findAll(): Promise<LocationEntity[]>{
         return this.Service.findAll();
     }
 
@@ -40,15 +40,15 @@ export class LocationController {
     @ApiResponse({
         status: 200,
         description: 'Found the location',
-        type: Location
+        type: LocationEntity
     })
     @ApiResponse({
         status: 404,
         description: 'No location with this name',
-        type: Location
+        type: LocationEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    findName(@Param('name') name: string): Promise<Location> {
+    findName(@Param('name') name: string): Promise<LocationEntity> {
       return this.Service.findOne({name: name});
     }
 
@@ -57,15 +57,15 @@ export class LocationController {
     @ApiResponse({
         status: 200,
         description: 'Found the location',
-        type: Location
+        type: LocationEntity
     })
     @ApiResponse({
         status: 404,
         description: 'No location with this country',
-        type: Location
+        type: LocationEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    findCountry(@Param('country') name: string): Promise<Location> {
+    findCountry(@Param('country') name: string): Promise<LocationEntity> {
         return this.Service.findOne({country: name});
     }
 }

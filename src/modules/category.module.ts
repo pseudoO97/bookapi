@@ -1,21 +1,18 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import {CategoryController} from "../controllers/category.controller";
 import {CategoryService} from "../services/category.service";
-import {Category, CategorySchema} from "../entities/category.entity";
-import { AuthModule } from 'src/jwt/auth/auth.module';
+import {CategoryEntity} from "../entities/category.entity";
 import { AuthService } from 'src/jwt/auth/auth.service';
-import { UserService } from 'src/services/User.service';
-import { UserModule } from './user.module';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {UserService} from "../services/user.service";
+import {AuthModule} from "../jwt/auth/auth.module";
+import {UserModule} from "./user.module";
+import {JwtModule} from "@nestjs/jwt";
 
 //Dorian
 @Module({
-    imports: [
-        MongooseModule.forFeature([{ name: Category.name, schema: CategorySchema, }]), 
-        AuthModule,
-        UserModule,
-    ],
+    imports: [TypeOrmModule.forFeature([CategoryEntity]), AuthModule, UserModule],
     controllers: [CategoryController],
-    providers: [CategoryService, AuthService],
+    providers: [CategoryService],
 })
 export class CategoryModule {}
