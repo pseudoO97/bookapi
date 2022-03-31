@@ -12,10 +12,21 @@ import { AuthorModule } from './modules/author.module';
 import {HasReadModule} from "./modules/has-read.module";
 import {DictionaryModule} from "./modules/dictionary.module"
 import {LocationModule} from "./modules/location.module";
+import {TypeOrmModule} from "@nestjs/typeorm";
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'books',
+      entities: [],
+      synchronize: true,
+    }),
+    // MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
     CategoryModule,
     AuthorModule,
     UserModule,
