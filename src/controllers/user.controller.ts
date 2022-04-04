@@ -1,4 +1,15 @@
-import {BadRequestException, Body, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Get,
+    HttpStatus,
+    Param,
+    Post,
+    Res,
+    UseGuards,
+    UsePipes
+} from '@nestjs/common';
 import {ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CreateUserDto} from '../dto/create-user.dto';
 import {UserEntity} from '../entities/user.entity';
@@ -8,6 +19,7 @@ import {LoginUserDto} from "../dto/login-user.dto";
 import * as bcrypt from "bcrypt";
 import {JwtService} from "@nestjs/jwt";
 import {JwtAuthGuard} from "../jwt/auth/jwd-auth.guard";
+import {ValidationPipe} from "../validation";
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -22,6 +34,7 @@ export class UserController {
     @ApiResponse({ status: 200, description: 'The user has been successfully created.' })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
     @ApiResponse({ status: 422, description: 'Miss matching values. Unprocessable Entity' })
+    @UsePipes(ValidationPipe)
     async register(@Body(Validate.VALIDATION_PIPE) createDto: CreateUserDto): Promise<UserEntity> {
         const user = await this.service.create(createDto);
 
@@ -37,18 +50,19 @@ export class UserController {
     @ApiResponse({ status: 200, description: 'The user has been successfully logged in.' })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
     @ApiResponse({ status: 422, description: 'Miss matching values. Unprocessable Entity' })
+    @UsePipes(ValidationPipe)
     async login(@Body(Validate.VALIDATION_PIPE) logginDto: LoginUserDto): Promise<UserEntity> {
         //On récupère le compte par l'email
         const userFindByMail = await this.service.findOne({where: {email: logginDto.email}});
 
         //On vérifie que l'user existe
         if(!userFindByMail) {
-            throw new BadRequestException("L'email est introuvable.");
+            throw new BadRequestException({errors: [{field: "email", messages: ["L'email n'existe pas."]}]});
         }
 
         //On vérifie que les mots de passes soient egaux
         if(!(await bcrypt.compare(logginDto.password, userFindByMail.password))) {
-            throw new BadRequestException("Le mot de passe n'est pas indentique.");
+            throw new BadRequestException({errors:[{field: "password", messages: ["Le mot de passe ne correspond pas à ce compte."]}]});
         }
 
         //Creation du token
