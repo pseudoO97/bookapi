@@ -1,13 +1,14 @@
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import {Document} from "mongoose";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-export type LangDocument = Lang & Document;
+@Entity({name: "langs"})
+export class LangEntity {
 
-export class Lang {
- // Auriane
+  @PrimaryGeneratedColumn()
+  @ApiProperty({example: 1, description:"The id of the lang"})
+  id: number;
+
+  @Column()
   @ApiProperty({example: "Français", description: "The book lang translation"})
-  @Prop({ type: String, required: true})
   name: string;
 }
-export const LangSchema = SchemaFactory.createForClass(Lang);

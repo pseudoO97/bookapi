@@ -1,20 +1,12 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { BookController } from 'src/controllers/book.controller';
-import { Book, BookSchema } from 'src/entities/book.entity';
-import { AuthModule } from 'src/jwt/auth/auth.module';
-import { AuthService } from 'src/jwt/auth/auth.service';
-import { BookService } from 'src/services/book.service';
-import { UserModule } from './user.module';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {BookEntity} from "../entities/book.entity";
+import {BookService} from "../services/book.service";
+import {BookController} from "../controllers/book.controller";
 
-//Auriane
 @Module({
-    imports: [
-        MongooseModule.forFeature([{ name: Book.name, schema: BookSchema }]),
-        AuthModule,
-        UserModule,
-    ],
-    controllers: [BookController],
-    providers: [BookService, AuthService],
+    imports: [TypeOrmModule.forFeature([BookEntity])],
+    providers: [BookService],
+    controllers: [BookController]
 })
 export class BookModule {}

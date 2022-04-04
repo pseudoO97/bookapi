@@ -1,24 +1,36 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { User, UserDocument } from "../entities/User";
-import { Model } from "mongoose";
-import { CreateUserDto } from "src/dto/create-user.dto";
+import { UserEntity } from "../entities/user.entity";
+import {InjectRepository} from "@nestjs/typeorm";
+import {FindOneOptions, Repository} from "typeorm";
+import {CreateUserDto} from "../dto/create-user.dto";
 
 @Injectable()
 export class UserService {
 
-    constructor(@InjectModel(User.name) private model: Model<UserDocument>) {}
+    constructor(
+        @InjectRepository(UserEntity)
+        private repository: Repository<UserEntity>
+    ) {}
 
-    async create(createUserDto: CreateUserDto): Promise<User> {
-        const createdCat = new this.model(createUserDto);
-        return createdCat.save();
+    async create(createUserDto: CreateUserDto): Promise<UserEntity> {
+
+        const user = new UserEntity();
+        user.pseudo = createUserDto.pseudo;
+        user.password = createUserDto.password;
+        user.email = createUserDto.email;
+
+        return await this.repository.save(user);
     }
 
-    async findAll(): Promise<User[]> {
-        return this.model.find().exec();
+    async findAll(): Promise<UserEntity[]> {
+        return this.repository.find();
     }
 
-   async findOne(pseudo: string): Promise<User | undefined> {
-        return await this.model.findOne({pseudo:pseudo}).exec();
+    async findOne(options?: FindOneOptions<UserEntity>): Promise<UserEntity> {
+        return this.repository.findOne(options);
+    }
+
+    update(user: UserEntity): Promise<UserEntity> {
+        return this.repository.save(user);
     }
 }

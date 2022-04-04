@@ -1,25 +1,26 @@
 import {Injectable} from "@nestjs/common";
-import {InjectModel} from "@nestjs/mongoose";
-import {Dictionary, DictionaryDocument} from "../entities/Dictionary";
-import {Model} from "mongoose";
-import { CreateDictionaryDto } from "src/dto/Dictionary.dto";
+import {DictionaryEntity} from "../entities/dictionary.entity";
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 
 @Injectable()
 export class DictionaryService {
-    
 
-    constructor(@InjectModel(Dictionary.name) private model: Model<DictionaryDocument>) {}
+    constructor(
+        @InjectRepository(DictionaryEntity)
+        private repository: Repository<DictionaryEntity>
+    ) {}
 
-    async create(createCatDto: CreateDictionaryDto): Promise<Dictionary> {
+/*    async create(createCatDto: CreateDictionaryDto): Promise<DictionaryEntity> {
         const createdCat = new this.model(createCatDto);
         return createdCat.save();
-    }
+    }*/
 
-    async findAll(): Promise<Dictionary[]> {
-        return this.model.find().exec();
+    async findAll(): Promise<DictionaryEntity[]> {
+        return this.repository.find();
     }
-    async findOne(name: string): Promise<Dictionary> {
-        return this.model.findOne({name:name}).exec();
+    async findOne(name: string): Promise<DictionaryEntity> {
+        return this.repository.findOne({name:name});
     }
 
 }

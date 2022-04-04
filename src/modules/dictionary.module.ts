@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Dictionary, DictionarySchema } from '../entities/dictionary';
+import { DictionaryEntity } from '../entities/dictionary.entity';
 import { DictionaryController } from '../controllers/dictionary.controller';
 import { DictionaryService } from '../services/dictionary.service';
+import {TypeOrmModule} from "@nestjs/typeorm";
 
 //Auriane
 @Module({
-    imports: [MongooseModule.forFeature([{ name: Dictionary.name, schema: DictionarySchema }])],
+    imports: [TypeOrmModule.forFeature([DictionaryEntity])],
     controllers: [DictionaryController],
     providers: [DictionaryService],
 })

@@ -1,15 +1,16 @@
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import {Document} from "mongoose";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-export type PublisherDocument = Publisher & Document;
+@Entity({name: "publishers"})
+export class PublisherEntity {
 
-export class Publisher {
-  //Auriane 
+  @PrimaryGeneratedColumn()
+  @ApiProperty({example: 1, description:"The id of the publisher"})
+  id: number;
 
-  @ApiProperty({example:"Français", description: "The publisher book's"})
-  @Prop({type: String, required:true})
+  @Column()
+  @ApiProperty({example:"Glenat", description: "The publisher book's"})
   name: string;
+
 }
 
-export const PublisherSchema = SchemaFactory.createForClass(Publisher);

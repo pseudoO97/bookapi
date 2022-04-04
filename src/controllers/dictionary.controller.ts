@@ -1,12 +1,9 @@
 import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import { CreateDictionaryDto } from 'src/dto/dictionary.dto';
-import { Dictionary } from 'src/entities/dictionary';
+import { DictionaryEntity } from 'src/entities/dictionary.entity';
 import {DictionaryService} from "../services/dictionary.service";
 
-
-
-//Dorian
 @ApiBearerAuth()
 @ApiTags('dictionary')
 @Controller('dictionary')
@@ -15,10 +12,10 @@ export class DictionaryController {
 
     @Post()
     @ApiOperation({ summary: 'Create a dictionary book'})
-    @ApiBody({type:Dictionary, description:"Insert a new dictionary for book."})
+    @ApiBody({type:DictionaryEntity, description:"Insert a new dictionary for book."})
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async create(@Body() createDto: CreateDictionaryDto): Promise<Dictionary> {
-        return this.Service.create(createDto);
+    async create(@Body() createDto: CreateDictionaryDto): Promise<DictionaryEntity> {
+        return null;//this.Service.create(createDto);
     }
 
     @Get()
@@ -26,10 +23,10 @@ export class DictionaryController {
     @ApiResponse({
         status: 200,
         description: 'Get all categories',
-        type: Dictionary
+        type: DictionaryEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async findAll(): Promise<Dictionary[]>{
+    async findAll(): Promise<DictionaryEntity[]>{
         return this.Service.findAll();
     }
 
@@ -38,15 +35,15 @@ export class DictionaryController {
     @ApiResponse({
         status: 200,
         description: 'Found the dictionary with the name',
-        type: Dictionary
+        type: DictionaryEntity
     })
     @ApiResponse({
         status: 404,
         description: 'No dictionary with this name',
-        type: Dictionary
+        type: DictionaryEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async findOne(@Param('name') name: string): Promise<Dictionary> {
+    async findOne(@Param('name') name: string): Promise<DictionaryEntity> {
         return this.Service.findOne(name);
     }
 }

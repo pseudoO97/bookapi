@@ -1,28 +1,24 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import {Body, Controller, Get, Module, Param, Post} from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { type } from "os";
 import { CreateAuthorDto } from "src/dto/create-author.dto";
 import { AuthorService } from "src/services/author.service";
-import {Author} from "../entities/author.entities";
+import {AuthorEntity} from "../entities/author.entity";
+import {TypeOrmModule} from "@nestjs/typeorm";
 
-
-
-// badis 
 @ApiBearerAuth()
 @ApiTags('author')
 @Controller('author')
-
 export class AuthorController {
 
     constructor(private readonly service: AuthorService) {}
 
     @Post()
-    @ApiOperation({summary: 'create an author'})
-    @ApiBody({type:Author,description: 'insert the author name'})
+    @ApiOperation({summary: 'Create an author'})
+    @ApiBody({type:AuthorEntity,description: 'Insert the author name'})
     @ApiResponse({ status: 403, description: 'forbidden'})
-
-    async create(@Body() CreateDto: CreateAuthorDto): Promise<Author> {
-        return this.service.create(CreateDto);
+    async create(@Body() CreateDto: CreateAuthorDto): Promise<AuthorEntity> {
+        return null;//this.service.create(CreateDto);
     }
 
     @Get(":firstname")
@@ -30,30 +26,28 @@ export class AuthorController {
     @ApiResponse({
         status: 200,
         description: 'Get first name ',
-        type: Author 
+        type: AuthorEntity
     })
     @ApiResponse({
         status: 404,
         description: 'No author with this first name',
-        type: Author 
+        type: AuthorEntity
     })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async findOne(@Param('firstname') name: string): Promise<Author> {
+    async findOne(@Param('firstname') name: string): Promise<AuthorEntity> {
         return this.service.findOne(name);
     
     }
 
     @Get()
-    @ApiOperation({summary: 'get the authors names'})
+    @ApiOperation({summary: 'Get the authors'})
     @ApiResponse({
         status: 200,
-        description: 'get all names',
-        type: Author
-
+        description: 'Get all authors',
+        type: AuthorEntity
     })
-
     @ApiResponse({ status: 403, description: 'forbidden'})
-    async findAll(): Promise<Author[]> {
+    async findAll(): Promise<AuthorEntity[]> {
         return this.service.findAll();
     }
 }

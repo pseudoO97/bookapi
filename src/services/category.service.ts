@@ -1,26 +1,26 @@
 import {Injectable} from "@nestjs/common";
-import {InjectModel} from "@nestjs/mongoose";
-import {Category, CategoryDocument} from "../entities/category.entity";
-import {Model} from "mongoose";
-import {CreateCategoryDto} from "src/dto/create-category.dto";
+import {CategoryEntity} from "../entities/category.entity";
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
+import {CreateCategoryDto} from "../dto/create-category.dto";
 
-//Dorian Jullian
 @Injectable()
 export class CategoryService {
 
-    constructor(@InjectModel(Category.name) private model: Model<CategoryDocument>) {}
+    constructor(
+        @InjectRepository(CategoryEntity)
+        private repository: Repository<CategoryEntity>
+    ) {}
 
-    async create(createCatDto: CreateCategoryDto): Promise<Category> {
-        const created = new this.model(createCatDto);
-        return await created.save();
+    async create(createCatDto: CreateCategoryDto): Promise<CategoryEntity> {
+        return await this.repository.save(createCatDto);
     }
 
-    async findAll(): Promise<Category[]> {
-        return await this.model.find().exec();
+    async findAll(): Promise<CategoryEntity[]> {
+        return await this.repository.find();
     }
 
-    async findOne(name: string): Promise<Category> {
-        return await this.model.findOne({name: name}).exec();
+    async findOne(name: string): Promise<CategoryEntity> {
+        return await this.repository.findOne({name: name});
     }
-
 }

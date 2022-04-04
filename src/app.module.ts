@@ -12,10 +12,23 @@ import { AuthorModule } from './modules/author.module';
 import {HasReadModule} from "./modules/has-read.module";
 import {DictionaryModule} from "./modules/dictionary.module"
 import {LocationModule} from "./modules/location.module";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: 3306,
+      username: process.env.USER,
+      password: process.env.DB_USER_PASSWORD,
+      database: process.env.DB,
+      entities: [],
+      synchronize: true,
+    }),
+    // MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
     CategoryModule,
     AuthorModule,
     UserModule,

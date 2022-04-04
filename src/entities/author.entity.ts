@@ -1,16 +1,19 @@
-import {Document} from "mongoose";
-import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {ApiProperty} from "@nestjs/swagger";
+ 
+@Entity({name:"authors"})
+export class AuthorEntity {
 
-export type AuthorDocument = Author & Document;
+    @PrimaryGeneratedColumn()
+    @ApiProperty({example: 1, description:"The id of the author"})
+    id: number;
 
-@Schema()
-export class Author {
+    @Column()
+    @ApiProperty({example: "Albert", description:"The last name of the author"})
+    lastName: string;
 
-  @Prop()
-  last_name: string;
+    @Column()
+    @ApiProperty({example: "Kling", description:"The first name of the author"})
+    firstName: string;
 
-  @Prop()
-  first_name: string;
 }
-
-export const AuthorSchema = SchemaFactory.createForClass(Author);
