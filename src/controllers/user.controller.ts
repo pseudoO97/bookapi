@@ -38,13 +38,14 @@ export class UserController {
     @ApiResponse({ status: 422, description: 'Miss matching values. Unprocessable Entity' })
     @UsePipes(ValidationPipe)
     async register(@Body(Validate.VALIDATION_PIPE) createDto: CreateUserDto): Promise<UserEntity> {
-        
-       const find = this.service.findOne({where:{email:createDto.email}});
-       if(find!=null){
-        throw new BadRequestException({errors:[{field: "email", messages: ["l'email et deja pris"]}]});
-       }
+
+        //si l'utilisateur a déjà un mail
+        const find = await this.service.findOne({where:{email:createDto.email}});
+        if(find != null){
+            throw new BadRequestException({errors:[{field: "email", messages: ["L'email est déjà prit."]}]});
+        }
         const user = await this.service.create(createDto);
-        
+
         //Creation du token
         user.token = await this.jwtService.signAsync({id: user.id});
 
