@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from "@nestjs/mongoose";
 import { CategoryModule } from './modules/category.module';
 import { BookModule } from './modules/book.module';
 import { UserModule } from './modules/user.module';
@@ -14,6 +13,17 @@ import {DictionaryModule} from "./modules/dictionary.module"
 import {LocationModule} from "./modules/location.module";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import * as dotenv from "dotenv";
+import {UserService} from "./services/user.service";
+import { AuthorEntity } from './entities/author.entity';
+import {DictionaryEntity} from "./entities/dictionary.entity";
+import {PublisherEntity} from "./entities/publisher.entity";
+import {UserEntity} from "./entities/user.entity";
+import {BookEntity} from "./entities/book.entity";
+import {LangEntity} from "./entities/lang.entity";
+import {LocationEntity} from "./entities/location.entity";
+import {CategoryEntity} from "./entities/category.entity";
+import {HasReadEntity} from "./entities/has-read.entity";
+import {Connection} from "typeorm";
 
 dotenv.config();
 @Module({
@@ -22,13 +32,12 @@ dotenv.config();
       type: 'mysql',
       host: process.env.DB_HOST,
       port: 3306,
-      username: process.env.USER,
+      username: process.env.DB_USER,
       password: process.env.DB_USER_PASSWORD,
       database: process.env.DB,
-      entities: [],
+      entities: [AuthorEntity,UserEntity,LocationEntity,LangEntity,BookEntity,DictionaryEntity,CategoryEntity,HasReadEntity,PublisherEntity],
       synchronize: true,
     }),
-    // MongooseModule.forRoot("mongodb+srv://book_api:azerty15963@cluster0.kgirz.mongodb.net/Cluster0?retryWrites=true&w=majority"),
     CategoryModule,
     AuthorModule,
     UserModule,
@@ -38,10 +47,11 @@ dotenv.config();
     AuthModule,
     HasReadModule,
     DictionaryModule,
-      LocationModule,
-    AuthModule
+    LocationModule,
   ],
   controllers: [AppController],
-  providers: [AuthService],
+  providers: [UserService, AuthService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private connection: Connection) {}
+}
