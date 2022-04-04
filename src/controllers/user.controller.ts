@@ -41,7 +41,7 @@ export class UserController {
 
         //si l'utilisateur a déjà un mail
         const find = await this.service.findOne({where:{email:createDto.email}});
-        if(find != null){
+        if(find){
             throw new BadRequestException({errors:[{field: "email", messages: ["L'email est déjà prit."]}]});
         }
         const user = await this.service.create(createDto);
