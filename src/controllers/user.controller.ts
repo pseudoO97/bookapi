@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
     BadRequestException,
     Body,
@@ -20,6 +21,7 @@ import * as bcrypt from "bcrypt";
 import {JwtService} from "@nestjs/jwt";
 import {JwtAuthGuard} from "../jwt/auth/jwd-auth.guard";
 import {ValidationPipe} from "../validation";
+import { text } from 'stream/consumers';
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -36,8 +38,13 @@ export class UserController {
     @ApiResponse({ status: 422, description: 'Miss matching values. Unprocessable Entity' })
     @UsePipes(ValidationPipe)
     async register(@Body(Validate.VALIDATION_PIPE) createDto: CreateUserDto): Promise<UserEntity> {
+        
+       const find = this.service.findOne({where:{email:createDto.email}});
+       if(find!=null){
+        throw new BadRequestException({errors:[{field: "email", messages: ["l'email et deja pris"]}]});
+       }
         const user = await this.service.create(createDto);
-
+        
         //Creation du token
         user.token = await this.jwtService.signAsync({id: user.id});
 
