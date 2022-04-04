@@ -23,7 +23,7 @@ $ npm install
 $ npm run start
 ```
 ## How it works
-- Pour tester la sécurité des URL sur Postman récupérer le token avec cette commande curl : 
+- Pour tester la  sécurité des URL sur Postman récupérer le token avec cette commande curl : 
 
 ```bash
 $ curl -X POST http://localhost:3000/login -d '{"username": "John", "password": "John"}' -H "Content-Type: application/json"
