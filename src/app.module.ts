@@ -13,16 +13,18 @@ import {HasReadModule} from "./modules/has-read.module";
 import {DictionaryModule} from "./modules/dictionary.module"
 import {LocationModule} from "./modules/location.module";
 import {TypeOrmModule} from "@nestjs/typeorm";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DB_HOST,
       port: 3306,
-      username: 'root',
-      password: '',
-      database: 'books',
+      username: process.env.USER,
+      password: process.env.DB_USER_PASSWORD,
+      database: process.env.DB,
       entities: [],
       synchronize: true,
     }),
